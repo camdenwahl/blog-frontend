@@ -7,7 +7,9 @@ import Home from './Home.jsx'
 import Navigation from './Navigation.jsx'
 import Blog from './Blog.jsx'
 
+
 const router = createBrowserRouter([
+  
   {
     path: "/",
     element: <App />
@@ -22,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/blogs/:name",
-    element: <Blog />
+    element: <Blog/>
   }
 ])
 

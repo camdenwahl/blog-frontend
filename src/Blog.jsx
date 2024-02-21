@@ -1,32 +1,18 @@
-import { useParams } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 
 
 function Blog() {
-    const {name} = useParams();
-
+    const {state} = useLocation();
+    const articleData = state.articleData;
     function handleSingleArticle(){
-        try {
-            fetch("http://localhost:3000/blogs", {
-                method: "GET",
-                mode: "cors"
-            })
-            .then(response => response.json())
-            .then(data => {
-                data.filter(dataP => {
-                    console.log(dataP.title);
-                })
-            })
-
-        } catch (error) {
-            alert(error);
-        }
+        console.log(state.articleData);
     }
 
     return(
         <div>
-            <h1 onClick={handleSingleArticle}>Sup brah</h1>
-            {name === "yeah"}
+            <h2>{articleData.title}</h2>
+            <h3>Date Posted: {articleData.date}</h3>
+            <p>{articleData.content}</p>
         </div>
     )
 }
