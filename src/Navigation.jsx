@@ -1,46 +1,29 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Navigation() {
     const navigate = useNavigate();
-    const [linkEnabled, setLinkEnabled] = useState(true); 
+    const [linkEnabled, setLinkEnabled] = useState(false); 
 
     function toggleLinkDirectionAndNavigate() {
-        setLinkEnabled(!linkEnabled);
+        setLinkEnabled(prevState => !prevState);    }
+
+    useEffect(() => {
+        console.log("Effect triggered, linkEnabled:", linkEnabled);
         if (linkEnabled) {
             navigate("/blogs");
         } else {
             navigate("/");
         }
-        setLinkEnabled(!linkEnabled);
-    }
+    }, [linkEnabled]); 
 
-    // FUNCTION FOR ADDING BLOG
-    // function sendData(event) {
-    //     event.preventDefault();
-    //     console.log(event.target);
-    //     const form = event.target;
-    //     try {
-    //       fetch("http://localhost:3000/blogs", {
-    //         method: "POST",
-    //         mode: "cors",
-    //       })
-      
-    //       .then(response => response.text())
-    //       .then(data => alert(data))
-    //       .catch(error => alert(error));
-          
-    //     }
-    //     catch (error) {
-    //       alert(error);
-    //     }
-    //   }
     
     return(
         <header id = "nav-bar">
-            <h1>Serious Blog</h1>
-            <Link to = {linkEnabled} className = "Link" onClick = {toggleLinkDirectionAndNavigate}>{linkEnabled ? "View Blogs" : "Go Home"}</Link>
+            <Link to = "/" id = "heading" >Web & Wizards</Link>
+            <button className = "Link" onClick = {toggleLinkDirectionAndNavigate}>{linkEnabled ? "Home" : "View Blogs"}</button>
             {/* <button onClick = {sendData}>Add Blog</button> */}
         </header>
     );

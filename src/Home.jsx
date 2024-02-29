@@ -32,7 +32,7 @@ function Home() {
             .then(response => response.json())
             .then(data => {
               const article = data.find(dataP => dataP.title === event.target.name);
-              setArticleData(article); // Assuming you want to store the whole article object
+              setArticleData(article); 
             })
 
         } catch (error) {
