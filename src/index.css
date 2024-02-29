@@ -55,3 +55,17 @@ html, body {
   font-size: 20px;
   margin: 1%;
 }
+
+#blog-content {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+  line-height: 200%;
+  font-size: 1.1em;
+}
+
+#blog-title, #blog-date {
+  margin-left: 10%;
+  margin-right: 10%;
+  line-height: 200%;
+}

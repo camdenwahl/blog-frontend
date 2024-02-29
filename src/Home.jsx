@@ -48,7 +48,8 @@ function Home() {
         <>
         <section id = "content-bar">
         {articleList.map((article) => {
-          const link = `/blogs/${article.title}`
+          if (article.status === "visible"){
+            const link = `/blogs/${article.title}`
           return (
             <div key = {article._id} className = "blog-blurb">
                 <h3>{article.title}</h3>
@@ -56,6 +57,8 @@ function Home() {
                 <Link to={{pathname: `${link}`}} state = {{articleData: article}} onClick ={handleSingleArticle} name = {article.title}>Read this blog.</Link>
             </div>
           )
+          }
+        
         }
         )}
         </section>

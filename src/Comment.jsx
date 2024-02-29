@@ -2,7 +2,6 @@
 
 function sendData(event) {
     event.preventDefault();
-    console.log(event.target);
     const form = event.target;
     try {
       fetch("http://localhost:3000/comment", {
