@@ -23,6 +23,15 @@ function Home() {
         }
       }
 
+      function extractFirstParagraphSimple(htmlContent) {
+        const endIndex = htmlContent.indexOf("</p>");
+        if (endIndex !== -1) {
+          // Add 4 to include the length of "</p>" itself
+          return htmlContent.substring(0, endIndex + 4);
+        }
+        return htmlContent; // Return the full content if no paragraph tag is found
+      }
+
       function handleSingleArticle(event){
         try {
             fetch("http://localhost:3000/blogs", {
@@ -48,13 +57,16 @@ function Home() {
         <>
         <section id = "content-bar">
         {articleList.map((article) => {
+          const date = new Date(article.date);
+          const newDate = date.toDateString();
+          const previewContent = extractFirstParagraphSimple(article.content); // Extract content up to the first </p>
           if (article.status === "visible"){
             const link = `/blogs/${article.title}`
           return (
             <div key = {article._id} className = "blog-blurb">
-                <h3>{article.title}</h3>
-                <h4>{article.date}</h4>
-                <Link to={{pathname: `${link}`}} state = {{articleData: article}} onClick ={handleSingleArticle} name = {article.title}>Read this blog.</Link>
+                <Link to={{pathname: `${link}`}} state = {{articleData: article}} onClick ={handleSingleArticle} id = "article-title" name = {article.title}>{article.title}</Link>
+                <div id = "preview-content" dangerouslySetInnerHTML={{ __html: previewContent }}></div>
+                <h4>{newDate}</h4>
             </div>
           )
           }

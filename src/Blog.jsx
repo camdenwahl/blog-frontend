@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import hljs from 'highlight.js';
+import Quill from "quill";
+import 'highlight.js/styles/night-owl.css';
 
 
 function Blog() {
     const {state} = useLocation();
     const articleData = state.articleData;
+    const date = new Date(articleData.date);
+    const formattedDate = date.toDateString();
     const [commentArray, setCommentArray] = useState([]);
+
+
+    
     
     function sendData(event) {
     event.preventDefault();
@@ -13,6 +21,8 @@ function Blog() {
     const formDataJson = Object.fromEntries(form.entries());
     formDataJson.blogId = articleData._id;
     const jsonData = JSON.stringify(formDataJson);
+
+
     try {
         fetch("http://localhost:3000/blogs/comment", {
         method: "POST",
@@ -40,7 +50,12 @@ function Blog() {
           })
           .then(response => response.json())
           .then(data => {
-            setCommentArray(currentComments => [...currentComments, ...data]);
+            data.forEach(comment => {
+                const linkedPost = comment.linkedPost
+                if (linkedPost === articleData._id) {
+                    setCommentArray(currentComments => [...currentComments, comment]);
+                }
+            })
           })
           .catch(error => alert(error))
         } catch (error) {
@@ -48,34 +63,54 @@ function Blog() {
         }
       }
 
-    useEffect(() => {
+      useEffect(() => {
         fetchComments();
-    }, [])
-
+        const articlesContent = document.getElementById('blog-content');
+        if (articlesContent) {
+            const preTags = articlesContent.querySelectorAll('pre');
+            preTags.forEach(pre => {
+                if (!pre.querySelector('code')) {
+                    const innerContent = pre.innerHTML;
+                    const codeElement = document.createElement('code');
+                    codeElement.innerHTML = innerContent;
+                    pre.innerHTML = '';
+                    pre.appendChild(codeElement);
+                    hljs.highlightElement(codeElement);
+                }
+            });
+        }
+    }, [articleData.content]); 
+    
+    
     return(
-        <div>
+        <div id = "container-flex">
             <h2 id = "blog-title">{articleData.title}</h2>
-            <h3 id = "blog-date">Date Posted: {articleData.date}</h3>
+            <h3 id = "blog-date">Date Posted: {formattedDate}</h3>
             <div id = "blog-content" dangerouslySetInnerHTML={{ __html: articleData.content }}></div>
+            <div id = "comment-div">
             <form action="/blogs/comment" onSubmit={sendData}>
-                <label htmlFor="">Name:</label>
-                <input type="text" name = "author"/>
-                <label htmlFor="">Comment:</label>
-                <input type="textarea" name = "content"/>
-                <button type = "submit">Submit</button>
-            </form>
-            <div>
-                <h2>Comments:</h2>                
-                {commentArray.map(comment => {
-                    if (comment.linkedPost === articleData._id && comment.status === "visible") {
-                        return (
-                            <>
-                            <h3>{comment.author}</h3>
-                            <div id = "comment-content">{comment.content}</div>
-                            </>
-                        )
-                    }
-                })}
+                            <label htmlFor="">Name:</label>
+                            <input type="text" name = "author"/>
+                            <label htmlFor="">Comment:</label>
+                            <textarea id = "comment-box" name="content" cols="30" rows="10" ></textarea>
+                            <button type = "submit">Submit</button>
+                        </form>
+                        <div id = "comment-list">
+                            <h2>Comments:</h2>                
+                            {commentArray.map(comment => {
+                                console.log(comment.linkedPost);
+                                if (comment.linkedPost === articleData._id && comment.status === "visible") {
+                                    return (
+                                        <>
+                                        <div id = "comment-content">
+                                        <h3>{comment.author}</h3>
+                                            {comment.content}
+                                        </div>
+                                        </>
+                                    )
+                                }
+                            })}
+                 </div>
             </div>
         </div>
     )

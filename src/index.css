@@ -18,6 +18,7 @@ html, body {
   background-color: #2A2B2A;
   height: 20vh;
   justify-content: space-between;
+  align-items: center;
 }
 
 #nav-bar h1 {
@@ -29,17 +30,36 @@ html, body {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  align-items: center;
 }
 
 .blog-blurb {
-  background-color: #C6C4BE;
+  background-color: #A3B18A;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 1%;
-  border: 1px solid black;
   height: 20%;
-  padding: 0px;
+  border-radius: 15px;
+  width: 50%;
+}
+
+.blog-blurb img {
+  width: 40%;
+  border-radius: 7px;
+}
+
+.blog-blurb a {
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+  width: 100%;
+  text-align: center;
+  background-color: #0F1108;
+  color: white;
+  font-size: 1.3rem;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
 }
 
 .blog-blurb h3 {
@@ -73,4 +93,87 @@ html, body {
 
 #heading {
   font-size: 1.5em;
+  margin: 1%;
+  margin-bottom: 5%;
+}
+
+#comment-div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #F2F7F2;
+  padding-bottom: 5%;
+  box-shadow: 1px 0px 10px 5px #F2F7F2;
+}
+
+#comment-div form {
+  display: flex;
+  flex-direction: column;
+  margin: 1%;
+  align-items: center;
+}
+#comment-div label {
+  margin: 2%;
+}
+
+#comment-div form input {
+  margin: 2%;
+  box-shadow: 0px 0px 5px 1px #474747;
+}
+#comment-content {
+  background-color: #E6EFE6;
+  padding: 4px;
+  margin: 3%;
+  border-radius: 7px;
+  box-shadow: 0px 0px 5px 1px #E6EFE6;
+}
+
+.Link {
+  color: white;
+  background-color: #474747;
+  padding: 0;
+  margin-right: 2%;
+  width: 10%;
+  height: 30%;
+  border: none;
+  border-radius: 10px;
+}
+
+#comment-box {
+  resize: none;
+  border-radius: 7px;
+  border: 1px solid black;
+  box-shadow: 0px 0px 5px 1px #474747;
+}
+
+#comment-list {
+  width: 80%;
+}
+
+#preview-content {
+  width: 60%;
+}
+
+#preview-content p:first-of-type {
+  margin: 1%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#preview-content p {
+  margin: 1%;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    .Link {
+      width: 50%
+    }
+
+    #comment-div form {
+      flex-direction: column;
+      margin-bottom: 5%;
+    }
+  }
 }

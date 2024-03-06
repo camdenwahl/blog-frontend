@@ -11,7 +11,6 @@ function Navigation() {
         setLinkEnabled(prevState => !prevState);    }
 
     useEffect(() => {
-        console.log("Effect triggered, linkEnabled:", linkEnabled);
         if (linkEnabled) {
             navigate("/blogs");
         } else {
