@@ -23,15 +23,18 @@ function Home() {
         }
       }
 
-      function extractFirstParagraphSimple(htmlContent) {
-        const endIndex = htmlContent.indexOf("</p>");
-        if (endIndex !== -1) {
-          // Add 4 to include the length of "</p>" itself
-          return htmlContent.substring(0, endIndex + 4);
+      function extractFirstParagraph(htmlContent) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, 'text/html');
+        const firstParagraph = doc.querySelector('p');
+        if (firstParagraph) {
+          let content = firstParagraph.textContent.substr(0, 200);
+          content += '...';
+          return `<p>${content}</p>`;
         }
-        return htmlContent; // Return the full content if no paragraph tag is found
+        return '<p>No content available.</p>';
       }
-
+      
       function handleSingleArticle(event){
         try {
             fetch("http://localhost:3000/blogs", {
@@ -59,7 +62,7 @@ function Home() {
         {articleList.map((article) => {
           const date = new Date(article.date);
           const newDate = date.toDateString();
-          const previewContent = extractFirstParagraphSimple(article.content); // Extract content up to the first </p>
+          const previewContent = extractFirstParagraph(article.content); // Extract content up to the first </p>
           if (article.status === "visible"){
             const link = `/blogs/${article.title}`
           return (

@@ -11,12 +11,11 @@ function sendData(event) {
       })
   
       .then(response => response.text())
-      .then(data => alert(data))
-      .catch(error => alert(error));
+      .then(data => data)
+      .catch(error => error);
       
     }
     catch (error) {
-      alert(error);
     }
   }
 

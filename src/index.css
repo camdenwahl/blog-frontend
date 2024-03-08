@@ -12,6 +12,28 @@ html, body {
   gap: 0px;
 }
 
+#welcome-parent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  margin-top: 3%;
+}
+
+#welcome-container {
+  width: 50%;
+
+}
+
+#welcome-container p {
+  line-height: 200%;
+}
+
+#landing-book {
+  width: 50%;
+}
+
 #nav-bar {
   color: white;
   display: flex;
@@ -40,7 +62,8 @@ html, body {
   align-items: center;
   margin: 1%;
   height: 20%;
-  border-radius: 15px;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   width: 50%;
 }
 
@@ -139,6 +162,11 @@ html, body {
   border-radius: 10px;
 }
 
+.Link:hover {
+  cursor: pointer;
+  transform: scale(1.05)
+}
+
 #comment-box {
   resize: none;
   border-radius: 7px;
@@ -158,15 +186,48 @@ html, body {
   margin: 1%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 #preview-content p {
   margin: 1%;
 }
 
+#logo {
+  width: 50%;
+}
+
+#logo:hover {
+  filter: hue-rotate(30deg);
+  transform: scale(1.05)
+}
+
+#article-title {
+  text-overflow: "-";
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#article-title:hover {
+  text-decoration: underline 0.15em rgb(255, 255, 255);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 300ms;
+  text-overflow: "-";
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.language-xml {
+  border-radius: 7px;
+}
+
 @media only screen and (max-width: 600px) {
+
+
+  #logo {
+    width: 60%;
+  }
   body {
+    font-size: .9em;
     .Link {
       width: 50%
     }
@@ -176,4 +237,22 @@ html, body {
       margin-bottom: 5%;
     }
   }
+
+  #article-title {
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 1em;
+    font-weight: 500;
+  }
+
+  .blog-blurb {
+    width: 85%;
+    font-size: .8em;
+    margin-bottom: 5%;
+    white-space: normal;
+    text-overflow: "-";
+    overflow: hidden;
+  }
 }
+

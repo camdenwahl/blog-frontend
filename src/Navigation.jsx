@@ -21,9 +21,8 @@ function Navigation() {
     
     return(
         <header id = "nav-bar">
-            <Link to = "/" id = "heading" >Web & Wizards</Link>
+            <Link to = "/" id = "heading" ><img src="/W&W.png" alt="wizard" id ="logo" onClick={toggleLinkDirectionAndNavigate}/></Link>
             <button className = "Link" onClick = {toggleLinkDirectionAndNavigate}>{linkEnabled ? "Home" : "View Blogs"}</button>
-            {/* <button onClick = {sendData}>Add Blog</button> */}
         </header>
     );
 }

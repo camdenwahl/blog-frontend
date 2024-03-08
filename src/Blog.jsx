@@ -11,6 +11,7 @@ function Blog() {
     const date = new Date(articleData.date);
     const formattedDate = date.toDateString();
     const [commentArray, setCommentArray] = useState([]);
+    const [submissionStatus, setSubmissionStatus] = useState("");
 
 
     
@@ -34,12 +35,16 @@ function Blog() {
         })
     
         .then(response => response.text())
-        .then(data => alert(data))
-        .catch(error => alert(error));
+        .then(data => {
+            setSubmissionStatus("Comment has been sent for review. Thank you for your feedback!")
+        })
+        .catch(error => {
+            setSubmissionStatus("Comment is too short or an error has occurred.")
+        });
         
     }
     catch (error) {
-        alert(error);
+        setSubmissionStatus("Comment is too short or an error has occurred.")
     }
     }
     function fetchComments(){
@@ -89,6 +94,7 @@ function Blog() {
             <div id = "blog-content" dangerouslySetInnerHTML={{ __html: articleData.content }}></div>
             <div id = "comment-div">
             <form action="/blogs/comment" onSubmit={sendData}>
+            <p>{submissionStatus}</p>   
                             <label htmlFor="">Name:</label>
                             <input type="text" name = "author"/>
                             <label htmlFor="">Comment:</label>

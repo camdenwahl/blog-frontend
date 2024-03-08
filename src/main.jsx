@@ -6,13 +6,18 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './Home.jsx'
 import Navigation from './Navigation.jsx'
 import Blog from './Blog.jsx'
+import Landing from './Landing.jsx'
 
 
 const router = createBrowserRouter([
   
   {
     path: "/",
-    element: <Navigation/>
+    element: 
+    <>
+    <Navigation/>
+    <Landing/>
+    </>
   },
   {
     path: "/blogs",
