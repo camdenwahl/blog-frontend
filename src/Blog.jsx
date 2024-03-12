@@ -25,7 +25,7 @@ function Blog() {
 
 
     try {
-        fetch("http://localhost:3000/blogs/comment", {
+        fetch("https://express-rest.fly.dev/blogs/comment", {
         method: "POST",
         mode: "cors",
         headers: {
@@ -49,7 +49,7 @@ function Blog() {
     }
     function fetchComments(){
         try{
-          fetch("http://localhost:3000/blogs/comment", {
+          fetch("https://express-rest.fly.dev/blogs/comment", {
             method: "GET",
             mode: "cors"
           })

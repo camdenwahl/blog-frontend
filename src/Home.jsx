@@ -9,7 +9,7 @@ function Home() {
     
       function handleArticleDisplay(){
         try{
-          fetch("http://localhost:3000/blogs", {
+          fetch("https://express-rest.fly.dev/blogs", {
             method: "GET",
             mode: "cors"
           })
@@ -37,7 +37,7 @@ function Home() {
       
       function handleSingleArticle(event){
         try {
-            fetch("http://localhost:3000/blogs", {
+            fetch("https://express-rest.fly.dev/blogs", {
                 method: "GET",
                 mode: "cors"
             })

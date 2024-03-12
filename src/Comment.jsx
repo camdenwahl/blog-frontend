@@ -4,7 +4,7 @@ function sendData(event) {
     event.preventDefault();
     const form = event.target;
     try {
-      fetch("http://localhost:3000/comment", {
+      fetch("https://express-rest.fly.dev/comment", {
         method: "POST",
         mode: "cors",
         body: new FormData(form)
